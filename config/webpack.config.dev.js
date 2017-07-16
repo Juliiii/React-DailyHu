@@ -146,7 +146,7 @@ module.exports = {
           /\.jpe?g$/,
           /\.png$/,
           /\.less$/,
-          /\.svg$/  
+          /\.svg$/,
         ],
         loader: require.resolve('file-loader'),
         options: {
@@ -226,7 +226,7 @@ module.exports = {
         loader: 'svg-sprite-loader',
         include: [
           require.resolve('antd-mobile').replace(/warn\.js$/, ''),  // 1. svg files of antd-mobile
-          // path.resolve(__dirname, 'src/my-project-svg-foler'),  // folder of svg files in your project
+          path.resolve(__dirname, '../src/icons'),  // folder of svg files in your project
         ]
       },
       {

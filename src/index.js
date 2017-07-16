@@ -2,9 +2,9 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 // import App from './App';
+import HBUButton from './components/HBUButton'
 import registerServiceWorker from './registerServiceWorker';
-import { Button } from 'antd-mobile';
 
 
-ReactDOM.render(<Button />, document.getElementById('root'));
+ReactDOM.render(<HBUButton />, document.getElementById('root'));
 registerServiceWorker();
