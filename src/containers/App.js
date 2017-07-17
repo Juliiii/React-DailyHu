@@ -1,7 +1,10 @@
-import React from 'react';
-import { Drawer, List, NavBar } from 'antd-mobile';
-import './App.css';
-
+import React, { Component } from 'react';
+import { Drawer, List } from 'antd-mobile';
+import HBUButton from '../components/HBUButton';
+import Particles from 'react-particles-js';
+import '../css/App.css';
+// const particlesJS = require('../lib/particles.js');
+/*
 class App extends React.Component {
   state = {
     docked: true,
@@ -43,5 +46,46 @@ class App extends React.Component {
     </div>);
   }
 }
+*/
 
+class App extends Component {
+
+
+  render () {
+    const params = {
+            particles: {
+              line_linked: {
+                shadow: {
+                  enable: true,
+                  color: "#3CA9D1",
+                  blur: 5
+                }
+              },
+              number: {
+                density: {
+                  value_area: 1000,
+                  enable: true
+                }
+              },
+              color: {
+                value: "#b61924"
+              },
+              shape:{
+                type: 'polygon'
+              }
+            }
+    }
+
+    const clientHeight = document.body.clientHeight;
+
+    return (
+      <div className="wrapper">
+        <Particles params={params}
+                   height={clientHeight}
+                   />
+        <HBUButton />
+      </div>
+    );
+  }
+}
 export default App;
