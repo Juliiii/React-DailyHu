@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import ArticlesListItem from './ArticlesListItem';
-import { ListView } from 'antd-mobile';
-// import MyDrawer from './MyDrawer';
+import { ListView, RefreshControl, Toast } from 'antd-mobile';
+import ArticlesListFooter from './ArticlesListFooter.js';
 
 function MyBody(props) {
   return (
@@ -25,6 +25,7 @@ class ArticlesList extends Component {
       isRefresh: false
     };
     this.loadMore = this.loadMore.bind(this);
+    this.refresh = this.refresh.bind(this);
   }
 
   componentWillReceiveProps (nextProps) {
@@ -36,7 +37,6 @@ class ArticlesList extends Component {
   }
 
   async loadMore () {
-    // console.log('1');
     if (!this.state.isLoading) {
       this.setState({
         isLoading: true
@@ -48,6 +48,16 @@ class ArticlesList extends Component {
     }
   }
 
+  async refresh () {
+    this.setState(
+      { isRefresh: true }
+    );
+    await this.props.refresh();
+    this.setState({
+      isRefresh: false
+    });
+    Toast.success('已经最新！', 1);
+  }
 
   render () {
     return(
@@ -56,14 +66,15 @@ class ArticlesList extends Component {
                   dataSource={this.state.dataSource}
                   initialListSize={this.props.data.length}
                   onEndReached = {this.loadMore}
-                  onEndReachedThreshold={0}
+                  onEndReachedThreshold={10}
                   scrollEventThrottle={500}
                   renderBodyComponent={() => <MyBody />}
                   style={{
                     overflow: "auto",
                     height: "100%"
                   }}
-
+                  renderFooter={() => <ArticlesListFooter isLoading={this.state.isLoading} />}
+                  refreshControl={<RefreshControl refreshing={this.state.isRefresh} onRefresh={this.refresh} />}
       />
     );
   }

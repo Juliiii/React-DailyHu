@@ -2,12 +2,10 @@ import React, { Component } from 'react';
 import { Drawer } from 'antd-mobile';
 import axios from 'axios';
 import HBUButton from '../components/HBUButton';
-import SideBar from '../components/SideBar';
-import ArticlesList from '../components/ArticlesList';
-// import Particles from '../components/Particles';
+import SideBar from '../components/SideBar/SideBar';
+import ArticlesList from '../components/ArticlesList/ArticlesList';
 import '../css/App.css';
 // import '../css/modest.css';
-// const particlesJS = require('../lib/particles.js');
 
 
 class App extends Component {
@@ -23,6 +21,7 @@ class App extends Component {
     };
     this.showMenu = this.showMenu.bind(this);
     this.loadMore = this.loadMore.bind(this);
+    this.refresh = this.refresh.bind(this);
   }
 
   async componentWillMount () {
@@ -73,6 +72,19 @@ class App extends Component {
     });    
   }
 
+  async refresh () {
+    let {site} = this.state;
+    const lists = (await axios({
+      method: 'get',
+      url: `/list?site=${site}&page=${1}`
+    })).data;
+    this.setState({
+      list: lists,
+      site,
+      page: 1
+    });   
+  }
+
   render () {
     const sidebar = (<SideBar meta={this.state.meta} changeMeta={this.changeMeta.bind(this)}/>);
     return (
@@ -83,7 +95,7 @@ class App extends Component {
                 sidebar={sidebar}
                 open={this.state.open}
                 onOpenChange={this.showMenu}>
-          <ArticlesList data={this.state.list} loadMore={this.loadMore}/>  
+          {this.state.list.length ? <ArticlesList data={this.state.list} loadMore={this.loadMore} refresh={this.refresh} /> : ''}
         </Drawer>
 
       </div>
