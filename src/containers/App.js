@@ -17,9 +17,12 @@ class App extends Component {
     this.state = {
       open: false,
       meta: [],
-      list: []
+      list: [],
+      page: 1,
+      site: ''
     };
     this.showMenu = this.showMenu.bind(this);
+    this.loadMore = this.loadMore.bind(this);
   }
 
   async componentWillMount () {
@@ -44,13 +47,30 @@ class App extends Component {
   async changeMeta (args) {
     const site = args.target.innerText;
     if (site === 'DailyHu' || site === 'about') return;
+    this.setState({
+      list: []
+    });
     const lists = (await axios({
       method: 'get',
       url: `/list?site=${site}&page=${1}`
     })).data;
     this.setState({
-      list: lists
+      list: lists,
+      site,
+      page: 1
     });
+  }
+
+  async loadMore () {
+    let {site, page} = this.state;
+    if (!site) return;
+    const lists = (await axios({
+      method: 'get',
+      url: `/list?site=${site}&page=${++page}`
+    })).data;
+    this.setState({
+      list: [...this.state.list, ...lists]
+    });    
   }
 
   render () {
@@ -63,7 +83,7 @@ class App extends Component {
                 sidebar={sidebar}
                 open={this.state.open}
                 onOpenChange={this.showMenu}>
-          <ArticlesList data={this.state.list} />  
+          <ArticlesList data={this.state.list} loadMore={this.loadMore}/>  
         </Drawer>
 
       </div>

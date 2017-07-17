@@ -13,9 +13,7 @@
   padding: 0;
 }
 
-.wrapper {
-  height: 100%;
-}
+
 .buttonWrapper {
   position: fixed;
   top: 0;
@@ -29,7 +27,10 @@
   background-color: #fff;
   padding: .2em;
 }
-
+.articlesItem-img {
+  height: 120px;
+  width: 120px;
+}
 
 .articlesItem-title {
   margin: 0 0 0 20px;

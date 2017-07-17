@@ -3,6 +3,15 @@ import ArticlesListItem from './ArticlesListItem';
 import { ListView } from 'antd-mobile';
 // import MyDrawer from './MyDrawer';
 
+function MyBody(props) {
+  return (
+    <div className="am-list-body my-body">
+      <span style={{ display: 'none' }}>you can custom body wrap element</span>
+      {props.children}
+    </div>
+  );
+}
+
 
 class ArticlesList extends Component {
   constructor (props) {
@@ -12,17 +21,30 @@ class ArticlesList extends Component {
     });
     this.state = {
       dataSource: dataSource.cloneWithRows(this.props.data),
-      data: this.props.data
+      isLoading: false,
+      isRefresh: false
     };
+    this.loadMore = this.loadMore.bind(this);
   }
 
   componentWillReceiveProps (nextProps) {
-    // console.log(nextProps.data.length);
     if (nextProps.data !== this.state.data) {
       this.state = {
         dataSource: this.state.dataSource.cloneWithRows(nextProps.data),
-        data: nextProps.data
       };
+    }
+  }
+
+  async loadMore () {
+    // console.log('1');
+    if (!this.state.isLoading) {
+      this.setState({
+        isLoading: true
+      });
+      await this.props.loadMore();
+      this.setState({
+        isLoading: false
+      });
     }
   }
 
@@ -31,17 +53,17 @@ class ArticlesList extends Component {
     return(
       <
         ListView renderRow={(rowData) => <ArticlesListItem {...rowData} />}
-                 dataSource={this.state.dataSource}
-                 useBodyScroll
-                 initialListSize={this.props.data.length}
-                 onEndReached = {() => console.log(1)}
-                 onScroll={() => { console.log('scroll'); }}
-                 scrollRenderAheadDistance={500}
-                 onEndReachedThreshold={10}
-                 scrollEventThrottle={200}
-                 useBodyScroll
-                renderFooter={() => (<div style={{ padding: 30, textAlign: 'center' }}>
-                  {this.state.isLoading ? 'Loading...' : 'Loaded'}</div>)}
+                  dataSource={this.state.dataSource}
+                  initialListSize={this.props.data.length}
+                  onEndReached = {this.loadMore}
+                  onEndReachedThreshold={0}
+                  scrollEventThrottle={500}
+                  renderBodyComponent={() => <MyBody />}
+                  style={{
+                    overflow: "auto",
+                    height: "100%"
+                  }}
+
       />
     );
   }
