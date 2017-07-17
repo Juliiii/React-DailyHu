@@ -27,6 +27,7 @@
   display: flex;
   align-items: center;
   background-color: #fff;
+  padding: .2em;
 }
 
 
@@ -41,4 +42,9 @@
   bottom: 10px;
   color: #333;
   font-size: 0.6em;
+}
+.am-list-body {
+  position: relative;
+  border: 1px solid #ddd;
+  background-color: rgba(0, 0, 0, 0);
 }
