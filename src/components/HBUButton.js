@@ -9,22 +9,22 @@ const HBUButton = (props) => {
     };
 
     const activeStyle = {
-        backgroundColor: "#ddd" 
+        backgroundColor: "#ddd"
     }
 
-
     return (
+        <div className="buttonWrapper">
             <Flex justify="start">
                 <Button icon={require('../icons/Hamburg.svg')} 
                         size="middle" 
                         type="ghost" 
                         style={style}
                         activeStyle={activeStyle}
-                        onClick={props.showMenu.bind(this)}
+                        onClick={props.showMenu}
                 />
             </Flex>
-    );  
-
-}
+        </div>
+    );
+};
 
 export default HBUButton;
