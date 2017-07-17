@@ -5,7 +5,7 @@ import SideBar from '../components/SideBar';
 import ArticlesList from '../components/ArticlesList';
 // import Particles from '../components/Particles';
 import '../css/App.css';
-import '../css/modest.css';
+// import '../css/modest.css';
 // const particlesJS = require('../lib/particles.js');
 
 

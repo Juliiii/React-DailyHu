@@ -6,6 +6,6 @@ export const ArticlesList = ({data}) => {
       {data.map((item, index) => <ArticlesListItem {...item} />)}
     </div>
   )
-}
+};
 
 export default ArticlesList;
