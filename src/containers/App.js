@@ -1,13 +1,14 @@
 import React, { Component } from 'react';
 import { Drawer, List } from 'antd-mobile';
 import HBUButton from '../components/HBUButton';
+import SliderBar from '../components/SliderBar';
 import Particles from 'react-particles-js';
 import '../css/App.css';
 // const particlesJS = require('../lib/particles.js');
 /*
 class App extends React.Component {
   state = {
-    docked: true,
+    open: true,
   }
   onDock = (d) => {
     this.setState({
@@ -30,8 +31,8 @@ class App extends React.Component {
     </List>);
 
     return (<div style={{ height: '100%' }}>
-      <NavBar iconName="ellipsis" onLeftClick={() => this.onDock('docked')}>
-        <span style={{fontSize: '0.3rem'}}>Docked in document</span>
+      <NavBar iconName="ellipsis" onLeftClick={() => this.onDock('open')}>
+        <span style={{fontSize: '0.3rem'}}>open in document</span>
       </NavBar>
       <Drawer
         className="my-drawer"
@@ -39,7 +40,7 @@ class App extends React.Component {
         contentStyle={{ color: '#A6A6A6', textAlign: 'center', paddingTop: 42 }}
         sidebarStyle={{ border: '1px solid #ddd' }}
         sidebar={sidebar}
-        docked={this.state.docked}
+        open={this.state.open}
       >
         Click upper-left corner icon
       </Drawer>
@@ -50,6 +51,30 @@ class App extends React.Component {
 
 class App extends Component {
 
+  constructor () {
+    super();
+    this.state = {
+      meta: [
+        {
+          thumb: '...',
+          extra: '1231231'
+        }
+      ],
+      open: false
+    }
+  }
+
+  showMenu (...args) {
+    this.setState({
+      open: !this.state.open
+    });
+
+    console.log(this.state.open);
+  }
+
+  changeMeta () {
+    console.log(11);
+  }
 
   render () {
     const params = {
@@ -77,13 +102,32 @@ class App extends Component {
     }
 
     const clientHeight = document.body.clientHeight;
+    const clientWidth = document.body.clientWidth;
+
+
+    const sidebar = (<SliderBar meta={this.state.meta} changeMeta={this.changeMeta.bind(this)}/>);
+
 
     return (
       <div className="wrapper">
-        <Particles params={params}
-                   height={clientHeight}
-                   />
-        <HBUButton />
+        <div className="particlesWrapper">
+          <Particles params={params}
+                    height={clientHeight}
+                    width={clientWidth}
+                    />
+        </div>
+        <HBUButton showMenu={this.showMenu.bind(this)} />
+       <Drawer className="my-drawer"
+                style = {{minHeight: "300px"}}
+                contentStyle={{ color: '#A6A6A6', textAlign: 'center', paddingTop: 30 }}
+                sidebarStyle={{ border: '1px solid #ddd' }}
+                overlayStyle={{ display: 'none'}}
+                sidebar={sidebar}
+                open={this.state.open}
+                onOpenChange={this.showMenu.bind(this)}>
+        1234
+        </Drawer>
+
       </div>
     );
   }

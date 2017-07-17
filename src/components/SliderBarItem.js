@@ -2,14 +2,14 @@ import React from 'react';
 import { List } from 'antd-mobile'
 
 
-const SliderItem = (props) => {
+const SliderBarItem = (props) => {
     return (
-     <List.Item  thumb={props.src}
+     <List.Item thumb={props.src}
                  multipleLine
-                 onClick={this.props.onClick.bind(this)}>
+                 onClick={props.onClick}>
          {props.extra}
      </List.Item>
     );
 }
 
-export default SliderItem;
+export default SliderBarItem;

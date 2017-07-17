@@ -14,16 +14,15 @@ const HBUButton = (props) => {
 
 
     return (
-        <div style={{position: "absolute", top: "0"}}>
             <Flex justify="start">
                 <Button icon={require('../icons/Hamburg.svg')} 
                         size="middle" 
                         type="ghost" 
                         style={style}
                         activeStyle={activeStyle}
+                        onClick={props.showMenu.bind(this)}
                 />
             </Flex>
-        </div>
     );  
 
 }
