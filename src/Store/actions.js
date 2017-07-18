@@ -47,6 +47,21 @@ const loadMoreFail = () => ({
 });
 
 
+const refreshFail = () => ({
+  type: actionTypes.REFRESH_START
+});
+
+const refreshStart = () => ({
+  type: actionTypes.REFRESH_SUCCESS
+});
+
+const refreshSuccess = (list) => ({
+  type: actionTypes.REFRESH_FAIL,
+  list,
+  props: 'list'
+});
+
+
 export const changeMeta = (site) => async (dispatch) => {
   dispatch(changeMetaStart());
   try {
@@ -93,15 +108,15 @@ export const loadMore = (site, page) => async (dispatch) => {
 }
 
 export const refresh = (site) => async (dispatch) => {
-  dispatch(loadMoreStart());
+  dispatch(refreshStart());
   try {
     let list = (await axios({
       method: 'get',
       url: `/list?site=${site}&page=${1}`
     })).data;
-    dispatch(loadMoreSuccess(list));
+    dispatch(refreshSuccess(list));
   } catch (ex) {
-    dispatch(loadMoreFail());
+    dispatch(refreshFail());
   }
 }
 

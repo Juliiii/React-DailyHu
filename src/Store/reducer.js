@@ -4,7 +4,9 @@ import * as actionTypes from './actonTypes';
 export const reducer = (state = {
   meta: [],
   list: [],
-  open: false
+  open: false,
+  site: '',
+  page: ''
 }, action) => {
     console.log(state);
     switch (action.type) {
@@ -32,6 +34,22 @@ export const reducer = (state = {
           ...state,
           [action.props]: action[action.props]
         };
+      case actionTypes.LOADMORE_SUCCESS:
+        return {
+          ...state,
+          [action.props]: [...state[action.props] , ...action[action.props]],
+          page: action.page
+        }
+      case actionTypes.REFRESH_SUCCESS:
+        return {
+          ...state,
+         [action.props]: action[action.props],
+         page: 1
+        }
+      case actionTypes.REFRESH_START:
+      case actionTypes.LOADMORE_START:
+      case actionTypes.REFRESH_FAIL:
+      case actionTypes.LOADMORE_FAIL:
       case actionTypes.CHANGEMETA_FAIL:
       case actionTypes.GETMETA_FAIL:
       default:
