@@ -8,7 +8,6 @@ export const reducer = (state = {
   site: '',
   page: ''
 }, action) => {
-    console.log(state);
     switch (action.type) {
       case actionTypes.OPENDRAWER:
         const { open } = state;
@@ -16,13 +15,13 @@ export const reducer = (state = {
           ...state,
           open: !open
         };
-      case actionTypes.CHANGEMETA_SUCCESS:
+      case actionTypes.CHANGEMETA_START:
       case actionTypes.GETMETA_START:
         return {
           ...state,
           [action.props]: []
         };
-      case actionTypes.CHANGEMETA_START:
+      case actionTypes.CHANGEMETA_SUCCESS:
         return {
           ...state,
           [action.props]: action[action.props],

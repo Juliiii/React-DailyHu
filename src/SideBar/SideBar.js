@@ -8,7 +8,6 @@ export const SideBar = (props) => {
     return(
       <List>
         {props.meta.map((item, index) => {
-          console.log(item);
           if (index === 0) {
             return <SideBarItem {...item} key={index} onClick={props.changeMeta} styles={{fontSize: "0.8em", marginBottom: "50px"}} />
           } else {
@@ -24,7 +23,9 @@ const mapDispatchToProps = (dispatch, ownProps) => {
   return {
     changeMeta: (e) => {
       const site = e.target.innerText;
+     
       if (site === 'DailyHu' || site === 'about') return;
+       console.log(site);
       dispatch(changeMeta(site));
     }
   }

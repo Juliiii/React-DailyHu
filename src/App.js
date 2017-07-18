@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import HBUButton from './HBUButton/HBUButton';
-import SideBar from './SideBar/SideBar';
-import ArticlesList from './ArticlesList/views/ArticlesList';
 import Drawer from './Drawer/Drawer';
 import './css/App.css';
 // import '../css/modest.css';

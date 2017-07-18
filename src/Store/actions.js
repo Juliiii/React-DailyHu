@@ -1,15 +1,17 @@
 import * as actionTypes from './actonTypes';
 import axios from 'axios';
-
+import { Toast } from 'antd-mobile';
 
 const changeMetaStart = () => ({
   type: actionTypes.CHANGEMETA_START
 });
 
-const changeMetaSuccess = (list) => ({
+const changeMetaSuccess = (list, site) => ({
   type: actionTypes.CHANGEMETA_SUCCESS,
   list,
-  props: 'list'
+  props: 'list',
+  page: 1,
+  site: site
 });
 
 const changeMetaFail = () => ({
@@ -35,7 +37,7 @@ const loadMoreStart = () => ({
   type: actionTypes.LOADMORE_START
 });
 
-const loadMoreSuccess = (page, list) => ({
+const loadMoreSuccess = (list, page) => ({
   type: actionTypes.LOADMORE_SUCCESS,
   page,
   list,
@@ -69,7 +71,7 @@ export const changeMeta = (site) => async (dispatch) => {
       method: 'get',
       url: `/list?site=${site}&page=${1}`
     })).data;
-    dispatch(changeMetaSuccess(list, 'list', site, 1));
+    dispatch(changeMetaSuccess(list, site));
   } catch (ex) {
     dispatch(changeMetaFail());
   }
@@ -95,6 +97,7 @@ export const getMeta = () => async (dispatch) => {
 }
 
 export const loadMore = (site, page) => async (dispatch) => {
+  console.log(page);
   dispatch(loadMoreStart());
   try {
     let list = (await axios({
@@ -115,6 +118,7 @@ export const refresh = (site) => async (dispatch) => {
       url: `/list?site=${site}&page=${1}`
     })).data;
     dispatch(refreshSuccess(list));
+    Toast.success('已经最新！', 1);
   } catch (ex) {
     dispatch(refreshFail());
   }

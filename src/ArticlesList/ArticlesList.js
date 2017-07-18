@@ -42,7 +42,7 @@ class ArticlesList extends Component {
       this.setState({
         isLoading: true
       });
-      await this.props.loadMore();
+      await this.props.loadMore(this.props.site, this.props.page);
       this.setState({
         isLoading: false
       });
@@ -53,11 +53,10 @@ class ArticlesList extends Component {
     this.setState(
       { isRefresh: true }
     );
-    await this.props.refresh();
+    await this.props.refresh(this.props.site);
     this.setState({
       isRefresh: false
     });
-    Toast.success('已经最新！', 1);
   }
 
   render () {
@@ -83,17 +82,19 @@ class ArticlesList extends Component {
 
 const mapStateToProps = (state, ownProps) => {
   return {
-    data: state.list
+    data: state.list,
+    site: state.site,
+    page: state.page
   }
 }
 
 const mapDispatchToProps = (dispatch, ownProps) => {
   return {
-    loadMore: () => {
-      dispatch()
+    loadMore: async (site, page) => {
+      dispatch(actions.loadMore(site, page))
     },
-    refresh: () => {
-
+    refresh: async (site) => {
+      dispatch(actions.refresh(site))
     }
   }
 }

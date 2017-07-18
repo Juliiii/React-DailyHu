@@ -3,7 +3,7 @@ import SideBar from '../SideBar/SideBar';
 import * as actions from '../Store/actions';
 import { Drawer } from 'antd-mobile';
 import { connect } from 'react-redux'; 
-
+import ArticlesList from '../ArticlesList/ArticlesList'
 
 export const MyDrawer = (props) => {
   return(
@@ -12,7 +12,7 @@ export const MyDrawer = (props) => {
             sidebar={<SideBar />}
             open={props.open}
             onOpenChange={props.showMenu}>
-      {list.length ? <ArticlesList data={data} loadMore={this.loadMore} refresh={this.refresh} /> : ''}
+      {props.list.length ? <ArticlesList /> : ''}
     </Drawer>
   )
 }
