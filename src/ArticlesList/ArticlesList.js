@@ -21,9 +21,7 @@ class ArticlesList extends Component {
       rowHasChanged: (row1, row2) => row1 !== row2,
     });
     this.state = {
-      dataSource: dataSource.cloneWithRows(this.props.data),
-      isLoading: false,
-      isRefresh: false
+      dataSource: dataSource.cloneWithRows(this.props.data)
     };
     this.loadMore = this.loadMore.bind(this);
     this.refresh = this.refresh.bind(this);
@@ -37,10 +35,14 @@ class ArticlesList extends Component {
     }
   }
 
-  async loadMore () {
-    if (!this.props.isLoading) {
+  loadMore () {
+    if (!this.props.isLoading && this.props.hasMore) {
       this.props.loadMore(this.props.site, this.props.page);
     }
+  }
+
+  refresh () {
+    this.props.refresh(this.props.site);
   }
 
   render () {
@@ -50,7 +52,7 @@ class ArticlesList extends Component {
                   dataSource={this.state.dataSource}
                   initialListSize={this.props.data.length}
                   onEndReached = {this.loadMore}
-                  onEndReachedThreshold={10}
+                  onEndReachedThreshold={0}
                   scrollEventThrottle={500}
                   renderBodyComponent={() => <MyBody />}
                   style={{
@@ -58,7 +60,7 @@ class ArticlesList extends Component {
                     height: "100%"
                   }}
                   renderFooter={() => <ArticlesListFooter isLoading={this.props.isLoading} />}
-                  refreshControl={<RefreshControl refreshing={this.props.isRefresh} onRefresh={this.props.refresh} />}
+                  refreshControl={<RefreshControl refreshing={this.props.isRefresh} onRefresh={this.refresh} />}
       />
     );
   }
@@ -70,16 +72,17 @@ const mapStateToProps = (state, ownProps) => {
     site: state.site,
     page: state.page,
     isLoading: state.isLoading,
-    isRefresh: state.isRefresh
+    isRefresh: state.isRefresh,
+    hasMore: state.hasMore
   }
 }
 
 const mapDispatchToProps = (dispatch, ownProps) => {
   return {
-    loadMore: async (site, page) => {
+    loadMore: (site, page) => {
       dispatch(actions.loadMore(site, page))
     },
-    refresh: async (site) => {
+    refresh: (site) => {
       dispatch(actions.refresh(site))
     }
   }

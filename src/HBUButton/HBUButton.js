@@ -2,7 +2,6 @@ import React from 'react';
 import { Button, Flex } from 'antd-mobile';
 import { connect } from 'react-redux';
 import * as actions from '../Store/actions';
-import './style.css';
 
 
 const HBUButton = (props) => {

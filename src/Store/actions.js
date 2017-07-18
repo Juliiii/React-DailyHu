@@ -2,17 +2,31 @@ import * as actionTypes from './actonTypes';
 import axios from 'axios';
 import { Toast } from 'antd-mobile';
 
-const changeMetaStart = () => ({
-  type: actionTypes.CHANGEMETA_START
+
+export const toggleDrawer = () => ({
+    type: actionTypes.OPENDRAWER,
+    props: 'open'
 });
 
+export const toggleHasMore = (hasMore) => ({
+  type: actionTypes.TOGGLEHASMORE,
+  hasMore
+});
 
 export const toggleIsLoading = () => ({
-  type: actionTypes.TOGGLEISLOADING
+  type: actionTypes.TOGGLEISLOADING,
+  props: 'isLoading'
 });
 
 export const toggleIsRefresh = () => ({
-  type: actionTypes.TOGGLEISREFRESH
+  type: actionTypes.TOGGLEISREFRESH,
+  props: 'isRefresh'
+});
+
+
+const changeMetaStart = () => ({
+  type: actionTypes.CHANGEMETA_START,
+  props: 'list'
 });
 
 const changeMetaSuccess = (list, site) => ({
@@ -75,11 +89,15 @@ const refreshSuccess = (list) => ({
 
 export const changeMeta = (site) => async (dispatch) => {
   dispatch(changeMetaStart());
+  dispatch(toggleHasMore(true));
+  dispatch(toggleDrawer());
+  Toast.loading('Loading...', 0, null);
   try {
     const list = (await axios({
       method: 'get',
       url: `/list?site=${site}&page=${1}`
     })).data;
+    Toast.hide();
     dispatch(changeMetaSuccess(list, site));
   } catch (ex) {
     dispatch(changeMetaFail());
@@ -106,18 +124,23 @@ export const getMeta = () => async (dispatch) => {
 }
 
 export const loadMore = (site, page) => async (dispatch) => {
-  dispatch(toggleIsLoading());
+  dispatch(toggleIsLoading(true));
   dispatch(loadMoreStart());
   try {
     let list = (await axios({
       method: 'get',
       url: `/list?site=${site}&page=${++page}`
     })).data;
-    dispatch(loadMoreSuccess(list, page));
+    if (list.length === 0) {
+      dispatch(toggleHasMore(false));
+    } else {
+      dispatch(loadMoreSuccess(list, page));
+    }
+    dispatch(toggleIsLoading(false));
   } catch (ex) {
     dispatch(loadMoreFail());
+    dispatch(toggleIsLoading(false));
   }
-  dispatch(toggleIsLoading());  
 }
 
 export const refresh = (site) => async (dispatch) => {
@@ -135,10 +158,3 @@ export const refresh = (site) => async (dispatch) => {
   }
   dispatch(toggleIsRefresh());
 }
-
-
-export const toggleDrawer = () => (
-  {
-    type: actionTypes.OPENDRAWER
-  }
-);

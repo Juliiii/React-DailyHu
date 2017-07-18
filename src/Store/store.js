@@ -9,7 +9,7 @@ const middleware = applyMiddleware(
 
 
 const store = createStore(reducer, middleware);
-console.log(store.getState());
+// console.log(store.getState());
 
 store.dispatch(getMeta())
 

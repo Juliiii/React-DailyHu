@@ -6,24 +6,24 @@ export const reducer = (state = {
   list: [],
   open: false,
   site: '',
-  page: ''
+  page: '',
+  isLoading: false,
+  isRefresh: false,
+  hasMore: true
 }, action) => {
     switch (action.type) {
-      case actionTypes.OPENDRAWER:
-        const { open } = state;
+      case actionTypes.TOGGLEHASMORE:
         return {
           ...state,
-          open: !open
-        };
-      case actionTypes.TOGGLEISLOADING:
-        return {
-          ...state,
-          isLoading: !state.isLoading
+          hasMore: action.hasMore
         }
-      case actionTypes.toggleIsRefresh:
+      case actionTypes.OPENDRAWER:
+      case actionTypes.TOGGLEISLOADING:
+      case actionTypes.TOGGLEISREFRESH:
+        const { props } = action;
         return {
           ...state,
-          isRefresh: !state.isRefresh
+          [props]: !state[props]
         }
       case actionTypes.CHANGEMETA_START:
       case actionTypes.GETMETA_START:

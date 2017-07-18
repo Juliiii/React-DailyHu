@@ -25,7 +25,6 @@ const mapDispatchToProps = (dispatch, ownProps) => {
       const site = e.target.innerText;
      
       if (site === 'DailyHu' || site === 'about') return;
-       console.log(site);
       dispatch(changeMeta(site));
     }
   }
