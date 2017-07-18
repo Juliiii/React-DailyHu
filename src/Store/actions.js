@@ -6,6 +6,15 @@ const changeMetaStart = () => ({
   type: actionTypes.CHANGEMETA_START
 });
 
+
+export const toggleIsLoading = () => ({
+  type: actionTypes.TOGGLEISLOADING
+});
+
+export const toggleIsRefresh = () => ({
+  type: actionTypes.TOGGLEISREFRESH
+});
+
 const changeMetaSuccess = (list, site) => ({
   type: actionTypes.CHANGEMETA_SUCCESS,
   list,
@@ -97,7 +106,7 @@ export const getMeta = () => async (dispatch) => {
 }
 
 export const loadMore = (site, page) => async (dispatch) => {
-  console.log(page);
+  dispatch(toggleIsLoading());
   dispatch(loadMoreStart());
   try {
     let list = (await axios({
@@ -108,9 +117,11 @@ export const loadMore = (site, page) => async (dispatch) => {
   } catch (ex) {
     dispatch(loadMoreFail());
   }
+  dispatch(toggleIsLoading());  
 }
 
 export const refresh = (site) => async (dispatch) => {
+  dispatch(toggleIsRefresh());
   dispatch(refreshStart());
   try {
     let list = (await axios({
@@ -122,6 +133,7 @@ export const refresh = (site) => async (dispatch) => {
   } catch (ex) {
     dispatch(refreshFail());
   }
+  dispatch(toggleIsRefresh());
 }
 
 

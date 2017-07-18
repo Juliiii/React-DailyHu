@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import ArticlesListItem from './children/ArticlesListItem';
 import ArticlesListFooter from './children/ArticlesListFooter.js';
-import { ListView, RefreshControl, Toast } from 'antd-mobile';
+import { ListView, RefreshControl } from 'antd-mobile';
 import { connect } from 'react-redux';
 import * as actions from '../Store/actions';
 
@@ -38,25 +38,9 @@ class ArticlesList extends Component {
   }
 
   async loadMore () {
-    if (!this.state.isLoading) {
-      this.setState({
-        isLoading: true
-      });
-      await this.props.loadMore(this.props.site, this.props.page);
-      this.setState({
-        isLoading: false
-      });
+    if (!this.props.isLoading) {
+      this.props.loadMore(this.props.site, this.props.page);
     }
-  }
-
-  async refresh () {
-    this.setState(
-      { isRefresh: true }
-    );
-    await this.props.refresh(this.props.site);
-    this.setState({
-      isRefresh: false
-    });
   }
 
   render () {
@@ -73,8 +57,8 @@ class ArticlesList extends Component {
                     overflow: "auto",
                     height: "100%"
                   }}
-                  renderFooter={() => <ArticlesListFooter isLoading={this.state.isLoading} />}
-                  refreshControl={<RefreshControl refreshing={this.state.isRefresh} onRefresh={this.refresh} />}
+                  renderFooter={() => <ArticlesListFooter isLoading={this.props.isLoading} />}
+                  refreshControl={<RefreshControl refreshing={this.props.isRefresh} onRefresh={this.props.refresh} />}
       />
     );
   }
@@ -84,7 +68,9 @@ const mapStateToProps = (state, ownProps) => {
   return {
     data: state.list,
     site: state.site,
-    page: state.page
+    page: state.page,
+    isLoading: state.isLoading,
+    isRefresh: state.isRefresh
   }
 }
 

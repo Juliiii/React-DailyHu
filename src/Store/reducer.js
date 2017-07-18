@@ -15,6 +15,16 @@ export const reducer = (state = {
           ...state,
           open: !open
         };
+      case actionTypes.TOGGLEISLOADING:
+        return {
+          ...state,
+          isLoading: !state.isLoading
+        }
+      case actionTypes.toggleIsRefresh:
+        return {
+          ...state,
+          isRefresh: !state.isRefresh
+        }
       case actionTypes.CHANGEMETA_START:
       case actionTypes.GETMETA_START:
         return {

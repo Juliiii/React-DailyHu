@@ -3,7 +3,6 @@ import thunkMiddleware from 'redux-thunk';
 import { reducer } from './reducer';
 import { getMeta } from './actions';
 
-
 const middleware = applyMiddleware(
   thunkMiddleware,
 );
