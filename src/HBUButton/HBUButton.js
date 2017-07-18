@@ -1,5 +1,7 @@
 import React from 'react';
-import {  Button, Flex } from 'antd-mobile';
+import { Button, Flex } from 'antd-mobile';
+import { connect } from 'react-redux';
+import * as actions from './actions.js';
 // import Hamburg from '../icons/Hamburg.svg';
 
 const HBUButton = (props) => {
@@ -27,4 +29,12 @@ const HBUButton = (props) => {
     );
 };
 
-export default HBUButton;
+const mapDispatchToProps = (dispatch, ownProps) => {
+    return {
+        showMenu: () => {
+            dispatch(actions.toggleDrawer())
+        }
+    };
+}
+
+export default connect(null, mapDispatchToProps)(HBUButton);
