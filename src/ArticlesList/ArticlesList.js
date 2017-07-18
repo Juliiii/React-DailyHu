@@ -1,12 +1,13 @@
 import React, { Component } from 'react'
-import ArticlesListItem from './ArticlesListItem';
+import ArticlesListItem from './children/ArticlesListItem';
+import ArticlesListFooter from './children/ArticlesListFooter.js';
 import { ListView, RefreshControl, Toast } from 'antd-mobile';
-import ArticlesListFooter from './ArticlesListFooter.js';
+import { connect } from 'react-redux';
+import * as actions from '../Store/actions';
 
 function MyBody(props) {
   return (
     <div className="am-list-body my-body">
-      {/*<span style={{ display: 'none' }}>you can custom body wrap element</span>*/}
       {props.children}
     </div>
   );
@@ -80,4 +81,21 @@ class ArticlesList extends Component {
   }
 };
 
-export default ArticlesList;
+const mapStateToProps = (state, ownProps) => {
+  return {
+    data: state.list
+  }
+}
+
+const mapDispatchToProps = (dispatch, ownProps) => {
+  return {
+    loadMore: () => {
+      dispatch()
+    },
+    refresh: () => {
+
+    }
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(ArticlesList)

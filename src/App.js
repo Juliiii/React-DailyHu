@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
-import { Drawer } from 'antd-mobile';
 import axios from 'axios';
 import HBUButton from './HBUButton/HBUButton';
-import SideBar from './SideBar/SideBar/SideBar';
+import SideBar from './SideBar/SideBar';
 import ArticlesList from './ArticlesList/views/ArticlesList';
+import Drawer from './Drawer/Drawer';
 import './css/App.css';
 // import '../css/modest.css';
 // const particlesJS = require('../lib/particles.js');
@@ -14,7 +14,7 @@ class App extends Component {
   constructor () {
     super();
     this.state = {
-      open: false,
+      open: true,
       meta: [],
       list: [],
       page: 1,
@@ -87,7 +87,7 @@ class App extends Component {
   }
 
   render () {
-    const sidebar = (<SideBar meta={this.state.meta} changeMeta={this.changeMeta.bind(this)}/>);
+    //const sidebar = (<SideBar meta={this.state.meta} changeMeta={this.changeMeta.bind(this)}/>);
     const data = [
     {
         "thumbnail": "https://avatars6.githubusercontent.com/u/2081487?v=4&s=120",
@@ -330,16 +330,11 @@ class App extends Component {
         "date": "5 个月前"
     }
 ]
+    // console.log(store);
     return (
       <div className="wrapper">
-        <HBUButton showMenu={this.showMenu} />
-        <Drawer className="my-drawer"
-                style = {{minHeight: document.documentElement.clientHeight}}
-                sidebar={sidebar}
-                open={this.state.open}
-                onOpenChange={this.showMenu}>
-          {data.length ? <ArticlesList data={data} loadMore={this.loadMore} refresh={this.refresh} /> : ''}
-        </Drawer>
+        <HBUButton />
+        <Drawer />
 
       </div>
     );
