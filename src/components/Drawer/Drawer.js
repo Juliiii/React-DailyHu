@@ -1,6 +1,6 @@
 import React from 'react';
 import SideBar from '../SideBar/SideBar';
-import * as actions from '../Store/actions';
+import * as actions from '../../Store/actions';
 import { Drawer } from 'antd-mobile';
 import { connect } from 'react-redux'; 
 import ArticlesList from '../ArticlesList/ArticlesList'

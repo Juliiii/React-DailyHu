@@ -1,6 +1,6 @@
 import React from 'react';
 import SideBarItem from './children/SideBarItem';
-import { changeMeta } from '../Store/actions';
+import { changeMeta } from '../../Store/actions';
 import { List } from 'antd-mobile';
 import { connect } from 'react-redux';
 
@@ -23,7 +23,6 @@ const mapDispatchToProps = (dispatch, ownProps) => {
   return {
     changeMeta: (e) => {
       const site = e.target.innerText;
-     
       if (site === 'DailyHu' || site === 'about') return;
       dispatch(changeMeta(site));
     }

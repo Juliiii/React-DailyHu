@@ -3,7 +3,7 @@ import ArticlesListItem from './children/ArticlesListItem';
 import ArticlesListFooter from './children/ArticlesListFooter.js';
 import { ListView, RefreshControl } from 'antd-mobile';
 import { connect } from 'react-redux';
-import * as actions from '../Store/actions';
+import * as actions from '../../Store/actions';
 
 function MyBody(props) {
   return (

@@ -1,7 +1,7 @@
 import React from 'react';
 import { Button, Flex } from 'antd-mobile';
 import { connect } from 'react-redux';
-import * as actions from '../Store/actions';
+import * as actions from '../../Store/actions';
 
 
 const HBUButton = (props) => {
@@ -17,7 +17,7 @@ const HBUButton = (props) => {
     return (
         <div className="buttonWrapper">
             <Flex justify="start">
-                <Button icon={require('../icons/Hamburg.svg')} 
+                <Button icon={require('../../icons/Hamburg.svg')} 
                         size="middle" 
                         type="ghost" 
                         style={style}
