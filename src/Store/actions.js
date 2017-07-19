@@ -23,6 +23,11 @@ export const toggleIsRefresh = () => ({
   props: 'isRefresh'
 });
 
+export const HideLogo = (showLogo) => ({
+  type: actionTypes.SHOWLOGO,
+  showLogo
+});
+
 
 const changeMetaStart = () => ({
   type: actionTypes.CHANGEMETA_START,
@@ -87,15 +92,15 @@ const refreshSuccess = (list) => ({
 });
 
 const getDetailFail = () => ({
-  type: actionTypes.GETDETAIL_START
+  type: actionTypes.GETDETAIL_FAIL
 });
 
 const getDetailStart = () => ({
-  type: actionTypes.GETDETAIL_SUCCESS
+  type: actionTypes.GETDETAIL_START
 });
 
 const getDetailSuccess = (__html) => ({
-  type: actionTypes.GETDETAIL_FAIL,
+  type: actionTypes.GETDETAIL_SUCCESS,
   __html,
 });
 
@@ -104,6 +109,7 @@ export const changeMeta = (site) => async (dispatch) => {
   dispatch(changeMetaStart());
   dispatch(toggleHasMore(true));
   dispatch(toggleDrawer());
+  dispatch(HideLogo(false));
   Toast.loading('Loading...', 0, null);
   try {
     let list = (await axios({

@@ -1,4 +1,6 @@
 export const OPENDRAWER = 'OPENDRAWER';
+export const SHOWLOGO = 'SHOWLOGO';
+
 
 export const CHANGEMETA_START = 'CHANGEMETA_START';
 export const CHANGEMETA_SUCCESS = 'CHANGEMETA_SUCCESS';

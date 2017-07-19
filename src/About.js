@@ -9,10 +9,12 @@ export const About = (props) => (
       direction="column" 
       align="center"
       style={{
-        marginTop: "150px"
+        paddingTop: "150px"
       }}
     >
-      <a target="_blank" rel="noopener noreferrer" href="https://github.com/Juliiii/React-DailyHu">github地址</a><br />
+      <div>
+        该项目:<a target="_blank" rel="noopener noreferrer" href="https://github.com/Juliiii/React-DailyHu">github地址</a><br />
+      </div>
       <p>改编舍友现代操作系统的期中作业</p>
       <a target="_blank" rel="noopener noreferrer" href="https://github.com/MegrezZhu/DailyHu">github地址</a><br />
       <Flex align="center">

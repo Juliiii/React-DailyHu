@@ -10,6 +10,7 @@ export const reducer = (state = {
   open: false,
   isLoading: false,
   isRefresh: false,
+  showLogo: true,
   hasMore: true
 }, action) => {
     switch (action.type) {
@@ -17,6 +18,11 @@ export const reducer = (state = {
         return {
           ...state,
           hasMore: action.hasMore
+        }
+      case actionTypes.SHOWLOGO:
+        return {
+          ...state,
+          showLogo: action.showLogo
         }
       case actionTypes.OPENDRAWER:
       case actionTypes.TOGGLEISLOADING:

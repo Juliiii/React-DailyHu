@@ -1,5 +1,4 @@
 import React from 'react';
-import axios from 'axios'
 import BackButton from '../components/BakcButton/BackButton';
 import Loading from 'react-loading';
 import { Flex } from 'antd-mobile';
@@ -9,7 +8,7 @@ import * as actions from '../store/actions';
 class Detail extends React.Component {
 
   async componentDidMount () {
-    const url=this.props.location.state;
+    const url= this.props.location.state;
     this.props.getDetail(url);
   }
 
@@ -19,7 +18,7 @@ class Detail extends React.Component {
       return (
         <div>
           <BackButton />
-          <div className="detail-wrapper" dangerouslySetInnerHTML = {{__html: this.props._html}} />
+          <div className="detail-wrapper" dangerouslySetInnerHTML = {{__html: this.props.__html}} />
         </div>
       );
     } else {
@@ -41,8 +40,8 @@ const mapStateToProps = (state, ownProps) => {
 
 const mapDispatchToProps = (dispatch, ownProps) => {
   return {
-    getDetail: () => {
-      dispatch(actions.getDetail())
+    getDetail: (url) => {
+      dispatch(actions.getDetail(url))
     }
   };
 }
