@@ -3,7 +3,6 @@ import { List } from 'antd-mobile'
 import { Link } from 'react-router';
 
 const SliderBarItem = (props) => {
-    console.log(props);
     if (props.link) {
         return (
         <Link to="/about">

@@ -73,17 +73,30 @@ const loadMoreFail = () => ({
 
 
 const refreshFail = () => ({
-  type: actionTypes.REFRESH_START
+  type: actionTypes.REFRESH_FAIL
 });
 
 const refreshStart = () => ({
-  type: actionTypes.REFRESH_SUCCESS
+  type: actionTypes.REFRESH_START
 });
 
 const refreshSuccess = (list) => ({
-  type: actionTypes.REFRESH_FAIL,
+  type: actionTypes.REFRESH_SUCCESS,
   list,
   props: 'list'
+});
+
+const getDetailFail = () => ({
+  type: actionTypes.GETDETAIL_START
+});
+
+const getDetailStart = () => ({
+  type: actionTypes.GETDETAIL_SUCCESS
+});
+
+const getDetailSuccess = (__html) => ({
+  type: actionTypes.GETDETAIL_FAIL,
+  __html,
 });
 
 
@@ -124,7 +137,7 @@ export const getMeta = () => async (dispatch) => {
 }
 
 export const loadMore = (site, page) => async (dispatch) => {
-  dispatch(toggleIsLoading(true));
+  dispatch(toggleIsLoading());
   dispatch(loadMoreStart());
   try {
     let list = (await axios({
@@ -136,10 +149,10 @@ export const loadMore = (site, page) => async (dispatch) => {
     } else {
       dispatch(loadMoreSuccess(list, page));
     }
-    dispatch(toggleIsLoading(false));
+    dispatch(toggleIsLoading());
   } catch (ex) {
     dispatch(loadMoreFail());
-    dispatch(toggleIsLoading(false));
+    dispatch(toggleIsLoading());
   }
 }
 
@@ -157,4 +170,21 @@ export const refresh = (site) => async (dispatch) => {
     dispatch(refreshFail());
   }
   dispatch(toggleIsRefresh());
+}
+
+
+export const getDetail = (url) => async (dispatch) => {
+  dispatch(getDetailStart());
+  dispatch(toggleIsLoading());
+  try {
+    const __html = (await axios({
+      method: 'get',
+      url: `/detail?url=${url}`
+    })).data;
+   dispatch(getDetailSuccess(__html));
+   dispatch(toggleIsLoading());
+  } catch (ex) {
+   dispatch(getDetailFail());
+   dispatch(toggleIsLoading());    
+  }
 }

@@ -4,9 +4,10 @@ import * as actionTypes from './actonTypes';
 export const reducer = (state = {
   meta: [],
   list: [],
-  open: false,
   site: '',
   page: '',
+  __html: '',
+  open: false,
   isLoading: false,
   isRefresh: false,
   hasMore: true
@@ -54,6 +55,17 @@ export const reducer = (state = {
           ...state,
          [action.props]: action[action.props],
          page: 1
+        }
+      case actionTypes.GETDETAIL_FAIL:
+      case actionTypes.GETDETAIL_START:
+        return {
+          ...state,
+          __html: ''
+        }
+      case actionTypes.GETDETAIL_SUCCESS:
+        return {
+          ...state,
+          __html: action.__html
         }
       case actionTypes.REFRESH_START:
       case actionTypes.LOADMORE_START:

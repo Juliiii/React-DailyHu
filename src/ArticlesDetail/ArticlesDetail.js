@@ -3,36 +3,23 @@ import axios from 'axios'
 import BackButton from '../components/BakcButton/BackButton';
 import Loading from 'react-loading';
 import { Flex } from 'antd-mobile';
+import { connect } from 'react-redux';
+import * as actions from '../store/actions';
 
 class Detail extends React.Component {
-  constructor (props) {
-    super(props);
-    this.state = {
-      _html: '',
-      isLoading: true
-    };
-  }
-
 
   async componentDidMount () {
     const url=this.props.location.state;
-    const _html = (await axios({
-      method: 'get',
-      url: `/detail?url=${url}`
-    })).data;
-    this.setState({
-      _html,
-      isLoading: false
-    })
+    this.props.getDetail(url);
   }
 
 
   render () {
-    if (!this.state.isLoading) {
+    if (!this.props.isLoading) {
       return (
         <div>
           <BackButton />
-          <div className="detail-wrapper" dangerouslySetInnerHTML = {{__html: this.state._html}} />
+          <div className="detail-wrapper" dangerouslySetInnerHTML = {{__html: this.props._html}} />
         </div>
       );
     } else {
@@ -45,6 +32,19 @@ class Detail extends React.Component {
   }
 }
 
+const mapStateToProps = (state, ownProps) => {
+  return {
+    isLoading: state.isLoading,
+    __html: state.__html
+  };
+}
 
-export default Detail;
+const mapDispatchToProps = (dispatch, ownProps) => {
+  return {
+    getDetail: () => {
+      dispatch(actions.getDetail())
+    }
+  };
+}
 
+export default connect(mapStateToProps, mapDispatchToProps)(Detail)
