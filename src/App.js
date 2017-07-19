@@ -9,8 +9,8 @@ import './css/App.css';
 const App = () => {
   return (
       <div className="wrapper">
-      <HBUButton />
-      <Drawer />
+        <HBUButton />
+        <Drawer />
       </div>
   );
 }

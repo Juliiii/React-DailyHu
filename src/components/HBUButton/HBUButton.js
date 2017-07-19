@@ -1,7 +1,7 @@
 import React from 'react';
 import { Button, Flex } from 'antd-mobile';
 import { connect } from 'react-redux';
-import * as actions from '../../Store/actions';
+import * as actions from '../../store/actions';
 
 
 const HBUButton = (props) => {
@@ -11,7 +11,7 @@ const HBUButton = (props) => {
     };
 
     const activeStyle = {
-        backgroundColor: "#ddd"
+        backgroundColor: "#eee"
     }
 
     return (

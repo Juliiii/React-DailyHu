@@ -93,7 +93,7 @@ export const changeMeta = (site) => async (dispatch) => {
   dispatch(toggleDrawer());
   Toast.loading('Loading...', 0, null);
   try {
-    const list = (await axios({
+    let list = (await axios({
       method: 'get',
       url: `/list?site=${site}&page=${1}`
     })).data;
