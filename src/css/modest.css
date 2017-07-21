@@ -138,3 +138,8 @@ pre,
 code {
   background-color: #fafafa;
 }
+
+.image-package {
+  display: flex;
+  flex-direction: column;
+}

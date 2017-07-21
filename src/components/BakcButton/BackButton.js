@@ -4,9 +4,10 @@ import { Link } from 'react-router';
 const style = {
     border: "none",
     paddingLeft: "0.5em",
-    position: 'absolute',
+    position: 'fixed',
     top: "0",
-    left: "0"
+    left: "0",
+    zIndex: "4"
 };
 
 const activeStyle = {
