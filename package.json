@@ -101,7 +101,7 @@
   "eslintConfig": {
     "extends": "react-app"
   },
-  "proxy": "http://localhost:8008",
+  "proxy": "http://119.29.12.21:8008",
   "devDependencies": {
     "svg-sprite-loader": "^0.3.1"
   }

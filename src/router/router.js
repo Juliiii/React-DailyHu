@@ -1,8 +1,8 @@
 import React from 'react';
 import { Router, Route, browserHistory } from 'react-router';
-import App from '../App';
-import About from '../About';
-import Detail from '../ArticlesDetail/ArticlesDetail'
+import App from '@/pages/App';
+import About from '@/pages/About';
+import Detail from '@/pages/ArticlesDetail';
 
 export const MyRouter = (props) => {
   return(

@@ -13,7 +13,8 @@ export const Logo = (props) => {
               width: document.documentElement.clientWidth || document.body.clientWidth,
               position: "absolute",
               top: "0",
-              left: "0"
+              left: "0",
+              zIndex: "-1"
             }
           }
     >

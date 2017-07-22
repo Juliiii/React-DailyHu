@@ -9,6 +9,7 @@ export const MyDrawer = (props) => {
   return(
     <Drawer className="my-drawer"
             style = {{minHeight: document.documentElement.clientHeight}}
+            sidebarStyle={{zIndex: "3"}}
             sidebar={<SideBar />}
             open={props.open}
             onOpenChange={props.showMenu}>

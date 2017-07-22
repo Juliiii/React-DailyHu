@@ -1,6 +1,6 @@
 import React from 'react'
 import { Flex, Icon } from 'antd-mobile';
-import BackButton from './components/BakcButton/BackButton';
+import BackButton from '@/components/BakcButton/BackButton';
 
 export const About = (props) => (
   <div>
@@ -19,7 +19,7 @@ export const About = (props) => (
       <a target="_blank" rel="noopener noreferrer" href="https://github.com/MegrezZhu/DailyHu">github地址</a><br />
       <Flex align="center">
         欢迎Start
-        <Icon type={require("./icons/star.svg")} 
+        <Icon type={require("@/icons/star.svg")} 
               style={{
                 marginLeft: "10px"
               }}

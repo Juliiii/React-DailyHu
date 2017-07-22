@@ -1,9 +1,9 @@
 import React from 'react';
-import BackButton from '../components/BakcButton/BackButton';
+import BackButton from '@/components/BakcButton/BackButton';
 import Loading from 'react-loading';
 import { Flex } from 'antd-mobile';
 import { connect } from 'react-redux';
-import * as actions from '../store/actions';
+import * as actions from '@/store/actions';
 
 class Detail extends React.Component {
 
