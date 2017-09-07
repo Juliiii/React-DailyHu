@@ -104,6 +104,13 @@ const getDetailSuccess = (__html) => ({
   __html,
 });
 
+function dbSave (payload) {
+  const entries = Object.entries(payload);
+  for (const entry of entries) {
+    localStorage.setItem(entry[0], JSON.stringify(entry[1]));
+  }
+}
+
 
 export const changeMeta = (site) => async (dispatch) => {
   dispatch(changeMetaStart());
@@ -114,8 +121,13 @@ export const changeMeta = (site) => async (dispatch) => {
   try {
     let list = (await axios({
       method: 'get',
-      url: `/list?site=${site}&page=${1}`
+      url: `/list?site=${site}&page=${0}`
     })).data;
+    dbSave({
+      list,
+      page: 0,
+      site
+    });
     Toast.hide();
     dispatch(changeMetaSuccess(list, site));
   } catch (ex) {
@@ -155,6 +167,11 @@ export const loadMore = (site, page) => async (dispatch) => {
     } else {
       dispatch(loadMoreSuccess(list, page));
     }
+    dbSave({
+      list,
+      page,
+      site
+    });
     dispatch(toggleIsLoading());
   } catch (ex) {
     dispatch(loadMoreFail());
@@ -168,9 +185,14 @@ export const refresh = (site) => async (dispatch) => {
   try {
     let list = (await axios({
       method: 'get',
-      url: `/list?site=${site}&page=${1}`
+      url: `/list?site=${site}&page=${0}`
     })).data;
     dispatch(refreshSuccess(list));
+    dbSave({
+      list,
+      page: 0,
+      site
+    });
     Toast.success('已经最新！', 1);
   } catch (ex) {
     dispatch(refreshFail());

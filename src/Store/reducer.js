@@ -1,16 +1,30 @@
 import * as actionTypes from './actonTypes';
 
+const [page, list, site] = ['page', 'list', 'site'].map(key => {
+  const item = localStorage.getItem(key);
+  if (item) {
+    return JSON.parse(item);
+  } else {
+    switch (key) {
+      case 'list': return [];
+      case 'site': return '';
+      case 'page': return 0;
+      default: return undefined;
+    }
+  }
+});
+
 
 export const reducer = (state = {
   meta: [],
-  list: [],
-  site: '',
-  page: '',
+  list,
+  site,
+  page,
   __html: '',
   open: false,
   isLoading: false,
   isRefresh: false,
-  showLogo: true,
+  showLogo: !list.length,
   hasMore: true
 }, action) => {
     switch (action.type) {
@@ -60,7 +74,7 @@ export const reducer = (state = {
         return {
           ...state,
          [action.props]: action[action.props],
-         page: 1
+         page: 0
         }
       case actionTypes.GETDETAIL_FAIL:
       case actionTypes.GETDETAIL_START:

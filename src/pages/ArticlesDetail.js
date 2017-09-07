@@ -8,10 +8,9 @@ import * as actions from '@/store/actions';
 class Detail extends React.Component {
 
   async componentDidMount () {
-    const url= this.props.location.state;
+    const url= decodeURIComponent(this.props.params.id);
     this.props.getDetail(url);
   }
-
 
   render () {
     if (!this.props.isLoading) {
