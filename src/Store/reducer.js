@@ -67,7 +67,8 @@ export const reducer = (state = {
       case actionTypes.LOADMORE_SUCCESS:
         return {
           ...state,
-          [action.props]: [...state[action.props] , ...action[action.props]],
+          // [action.props]: [...state[action.props] , ...action[action.props]],
+          [action.props]: action[action.props],
           page: action.page
         }
       case actionTypes.REFRESH_SUCCESS:

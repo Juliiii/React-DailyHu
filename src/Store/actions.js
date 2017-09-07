@@ -154,7 +154,7 @@ export const getMeta = () => async (dispatch) => {
   }
 }
 
-export const loadMore = (site, page) => async (dispatch) => {
+export const loadMore = (site, page) => async (dispatch, getState) => {
   dispatch(toggleIsLoading());
   dispatch(loadMoreStart());
   try {
@@ -165,6 +165,8 @@ export const loadMore = (site, page) => async (dispatch) => {
     if (list.length === 0) {
       dispatch(toggleHasMore(false));
     } else {
+      const {list : oldList} = getState();
+      list = [...oldList, ...list];
       dispatch(loadMoreSuccess(list, page));
     }
     dbSave({
