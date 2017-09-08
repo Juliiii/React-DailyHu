@@ -28,6 +28,8 @@ class ArticlesList extends React.Component {
   }
   
   componentDidMount () {
+    const scrollTop = localStorage.getItem('scrollTop');
+    this.refs.lv.scrollTo(0, scrollTop ? Number(scrollTop): 0);
   }
 
   componentWillReceiveProps (nextProps) {
@@ -39,7 +41,7 @@ class ArticlesList extends React.Component {
   }
   
   componentWillUnmount () {
-    console.log(1);
+    localStorage.setItem('scrollTop', this.refs.lv.refs.listview.scrollProperties.offset);
   }
 
   loadMore () {
@@ -54,14 +56,13 @@ class ArticlesList extends React.Component {
     }
   }
 
-  render() {
+  render () {
     return (
       <ListView
         ref="lv"
         dataSource={this.state.dataSource}
         style={{
           height: document.documentElement.clientHeight || document.body.clientHeight,
-          overflow: 'auto',
           border: '1px solid #ddd',
         }}
         scrollEventThrottle={500}
