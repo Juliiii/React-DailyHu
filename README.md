@@ -3,8 +3,6 @@
 一个可以看到cnode, 知乎，推酷和简书文章的webapp(sina的由于出了点小问题，暂时不提供)
 
 ## demo
-[demo](http://long0506.cc:8008)
-PS：pc端打开用chrome的手机端模拟器食用更佳
 ![1.png](http://okuww23ih.bkt.clouddn.com/1.jpg)
 ![2.png](http://okuww23ih.bkt.clouddn.com/2.jpg)
 ![3.png](http://okuww23ih.bkt.clouddn.com/3.jpg)
