@@ -1,6 +1,6 @@
 ## 简介
 
-一个可以看到cnode, 知乎，推酷和简书文章的webapp(sina的由于出了点小问题，暂时不提供)
+一个可以看到cnode, 知乎，推酷和简书文章的webapp(sina的由于出了点小问题，暂时不提供)（附，由于个人服务器崩了，所以暂时clone下来，代理不到服务器）
 
 ## demo
 ![1.png](http://okuww23ih.bkt.clouddn.com/1.jpg)
